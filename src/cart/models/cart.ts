@@ -13,12 +13,13 @@ import {
     @PrimaryGeneratedColumn('uuid')
     id: string;
   
-    @Column()
+    @Column({ type: 'uuid', nullable: false })
     userId: string;
   
     @CreateDateColumn({
       type: 'timestamp',
       default: () => 'CURRENT_TIMESTAMP(6)',
+      nullable: false,
     })
     createdAt: Date;
   
@@ -26,15 +27,16 @@ import {
       type: 'timestamp',
       default: () => 'CURRENT_TIMESTAMP(6)',
       onUpdate: 'CURRENT_TIMESTAMP(6)',
+      nullable: false,
     })
     updatedAt: Date;
   
     @Column({
       type: 'enum',
       enumName: 'CART_STATUS',
-      enum: ['OPENED', 'ORDERED'],
+      enum: ['OPEN', 'ORDERED'],
     })
-    status: 'OPENED' | 'ORDERED';
+    status: 'OPEN' | 'ORDERED';
   
     @OneToMany(
       () => CartItem,

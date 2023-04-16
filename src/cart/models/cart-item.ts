@@ -4,12 +4,13 @@ import { Product } from './product';
 
 @Entity('cart_items')
 export class CartItem {
-  @PrimaryColumn()
+  @PrimaryColumn({ type: 'uuid', nullable: false })
   productId: string;
-  @PrimaryColumn({ type: 'uuid' })
+
+  @PrimaryColumn({ type: 'uuid', nullable: false })
   cartId: string;
 
-  @Column()
+  @Column({ type: 'integer', nullable: false })
   count: number;
 
   @ManyToOne(
@@ -19,7 +20,7 @@ export class CartItem {
       orphanedRowAction: 'delete',
     },
   )
-  @JoinColumn({ name: 'cartId' })
+  @JoinColumn({ name: 'cartId', referencedColumnName: 'id' })
   cart: Cart;
 
   @Column({ type: 'simple-json' })

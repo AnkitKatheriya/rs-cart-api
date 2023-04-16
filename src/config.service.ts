@@ -1,6 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Cart, CartItem } from './cart';
-import { Order } from './order';
 require('dotenv').config({ path: `.env.local` });
 
 class ConfigService {
@@ -39,7 +38,7 @@ class ConfigService {
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
 
-      entities: [CartItem, Cart, Order],
+      entities: [CartItem, Cart],
 
       migrationsTableName: 'migration',
 
